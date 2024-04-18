@@ -15,7 +15,7 @@ export class JsonPathViewer extends LitElement {
         this.result = '';
     }
 
-    static async getMetaConfig() {
+    static getMetaConfig() {
         return {
             controlName: 'pma-json-path',
             groupName: 'Custom PMA Controls',
