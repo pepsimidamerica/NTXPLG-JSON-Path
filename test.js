@@ -15,6 +15,27 @@ export class JsonPathViewer extends LitElement {
         this.result = '';
     }
 
+    static async getMetaConfig() {
+        return {
+            controlName: 'pma-json-path',
+            groupName: 'Custom PMA Controls',
+            fallbackDisableSubmit: false,
+            version: '1.0',
+            properties: {
+                jsonData: {
+                    type: 'string',
+                    title: 'JSON Data',
+                    description: 'The JSON data to query'
+                },
+                jsonPath: {
+                    type: 'string',
+                    title: 'JSON Path',
+                    description: 'The JSON path to query'
+                }
+            }
+        };
+    }
+
     updated(changedProperties) {
         if (changedProperties.has('jsonData') || changedProperties.has('jsonPath')) {
             this.evaluateJsonPath();
@@ -44,4 +65,4 @@ export class JsonPathViewer extends LitElement {
     }
 }
 
-customElements.define('json-path-viewer', JsonPathViewer);
+customElements.define('pma-json-path', JsonPathViewer);
