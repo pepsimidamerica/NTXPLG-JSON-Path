@@ -17,7 +17,7 @@ export class JsonPathViewer extends LitElement {
 
     static getMetaConfig() {
         return {
-            controlName: 'pma-json-path',
+            controlName: 'pepsimid-jsonpath',
             fallbackDisableSubmit: false,
             groupName: 'Custom PMA Controls',
             version: '1.2',
