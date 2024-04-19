@@ -65,4 +65,5 @@ export class JsonPathViewer extends LitElement {
     }
 }
 
-customElements.define('pma-json-path', JsonPathViewer);
+const elementName = 'pma-jsonpath';
+customElements.define(elementName, JsonPathViewer);
