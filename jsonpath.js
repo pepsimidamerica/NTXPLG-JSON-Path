@@ -1,5 +1,5 @@
-import { html, LitElement } from '<https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js>';
-import jsonpath from '<https://cdn.jsdelivr.net/npm/jsonpath@1/jsonpath.min.js>';
+import { html, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
+import jsonpath from 'https://cdn.jsdelivr.net/npm/jsonpath@1/jsonpath.min.js';
 
 export class JsonPathViewer extends LitElement {
     static properties = {
@@ -18,8 +18,8 @@ export class JsonPathViewer extends LitElement {
     static getMetaConfig() {
         return {
             controlName: 'pma-json-path',
-            groupName: 'Custom PMA Controls',
             fallbackDisableSubmit: false,
+            groupName: 'Custom PMA Controls',
             version: '1.2',
             properties: {
                 jsonData: {
@@ -65,5 +65,5 @@ export class JsonPathViewer extends LitElement {
     }
 }
 
-const elementName = 'pma-jsonpath';
+const elementName = 'pepsimid-jsonpath';
 customElements.define(elementName, JsonPathViewer);
