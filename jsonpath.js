@@ -1,18 +1,19 @@
-import { html, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
+import { html, LitElement, property } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 import jsonpath from 'https://cdn.jsdelivr.net/npm/jsonpath@1/jsonpath.min.js';
 
 export class JsonPathViewer extends LitElement {
-    static properties = {
-        jsonData: { type: String },
-        jsonPath: { type: String },
-        result: { type: String },
-    };
+    @property({ type: String }) jsonData = '{}';
+    @property({ type: String }) jsonPath = '$';
+    @property({ type: String }) result = '';
 
     static getMetaConfig() {
         return {
             controlName: 'JSON Path',
+            description: 'Query JSON data using JSON Path',
             fallbackDisableSubmit: false,
-            // groupName: 'Custom PMA Controls',
+            pluginAuthor: 'Jordan',
+            pluginVersion: '1.0.0',
+            groupName: 'Custom PMA Controls',
             version: '1.2',
             properties: {
                 jsonData: {
@@ -27,13 +28,6 @@ export class JsonPathViewer extends LitElement {
                 }
             }
         };
-    }
-
-    constructor() {
-        super();
-        this.jsonData = '{}';
-        this.jsonPath = '$';
-        this.result = '';
     }
 
     updated(changedProperties) {
@@ -60,7 +54,7 @@ export class JsonPathViewer extends LitElement {
     }
 
     render() {
-        return html`<p>${this.result}<p/>`;
+        return html`<p>${this.result}</p>`;
     }
 }
 
