@@ -5,21 +5,14 @@ export class JsonPathViewer extends LitElement {
     static properties = {
         jsonData: { type: String },
         jsonPath: { type: String },
-        result: { type: String, state: true },
+        result: { type: String },
     };
-
-    constructor() {
-        super();
-        this.jsonData = '{}';
-        this.jsonPath = '$';
-        this.result = '';
-    }
 
     static getMetaConfig() {
         return {
-            controlName: 'pepsimid-jsonpath',
+            controlName: 'JSON Path',
             fallbackDisableSubmit: false,
-            groupName: 'Custom PMA Controls',
+            // groupName: 'Custom PMA Controls',
             version: '1.2',
             properties: {
                 jsonData: {
@@ -36,6 +29,13 @@ export class JsonPathViewer extends LitElement {
         };
     }
 
+    constructor() {
+        super();
+        this.jsonData = '{}';
+        this.jsonPath = '$';
+        this.result = '';
+    }
+
     updated(changedProperties) {
         if (changedProperties.has('jsonData') || changedProperties.has('jsonPath')) {
             this.evaluateJsonPath();
@@ -43,27 +43,26 @@ export class JsonPathViewer extends LitElement {
     }
 
     evaluateJsonPath() {
+        let parsedData;
         try {
-            const parsedData = JSON.parse(this.jsonData);
+            parsedData = JSON.parse(this.jsonData);
+        } catch (error) {
+            console.error("Error parsing JSON:", error);
+            this.result = 'Error parsing JSON.';
+        }
+        try {
             const result = jsonpath.query(parsedData, this.jsonPath);
             this.result = JSON.stringify(result, null, 2);
         } catch (error) {
-            this.result = 'Error parsing JSON or evaluating JSON Path.';
+            console.error("Error evaluating JSON Path:", error);
+            this.result = 'Error evaluating JSON Path.';
         }
     }
 
     render() {
-        return html`
-            <div>
-                <label for="jsonData">JSON Data:</label>
-                <textarea id="jsonData" .value=${this.jsonData} @input=${e => this.jsonData = e.target.value}></textarea>
-                <label for="jsonPath">JSON Path:</label>
-                <input type="text" id="jsonPath" .value=${this.jsonPath} @input=${e => this.jsonPath = e.target.value} />
-                <pre>${this.result}</pre>
-            </div>
-        `;
+        return html`<p>${this.result}<p/>`;
     }
 }
 
-const elementName = 'pepsimid-jsonpath';
-customElements.define(elementName, JsonPathViewer);
+// Registering the web component
+customElements.define('pma-jsonpath', JsonPathViewer);
